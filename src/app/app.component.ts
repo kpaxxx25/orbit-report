@@ -11,8 +11,6 @@ export class AppComponent {
   sourceList: Satellite[];
 
 
-
-
 constructor() {
   this.sourceList = [];
   let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
@@ -21,12 +19,14 @@ constructor() {
      response.json().then(function(data) {
 
         let fetchedSatellites = data.satellites;
-        // TODO: loop over satellites
-        // TODO: create a Satellite object using new Satellite(fetchedSatellites[i].name, fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational);
-        // TODO: add the new Satellite object to sourceList using: this.sourceList.push(satellite);
+        for (let i = 0; i < fetchedSatellites.length; i++){
+            let satellite = new Satellite(fetchedSatellites[i].name,fetchedSatellites[i].type, fetchedSatellites[i].launchDate, fetchedSatellites[i].orbitType, fetchedSatellites[i].operational)
+            this.sourceList.push(satellite);
+          }
+        
 
      }.bind(this));
   }.bind(this));
 
 }
-}
+};
